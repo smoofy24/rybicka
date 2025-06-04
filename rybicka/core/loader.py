@@ -6,7 +6,7 @@ def load_blades():
     blades = {}
     blades_dir = os.path.join(os.path.dirname(__file__), "..", "blades")
 
-    for entry in os.listdir(blades_dir):
+    for entry in filter(lambda x: x != "__pycache__", os.listdir(blades_dir)):
         blade_path = os.path.join(blades_dir, entry)
         if not os.path.isdir(blade_path):
             continue
