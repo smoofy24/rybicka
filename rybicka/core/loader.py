@@ -1,6 +1,6 @@
 import os
 import importlib
-from core.blade_base import BaseBlade
+from rybicka.core.blade_base import BaseBlade
 
 def load_blades():
     blades = {}
@@ -12,7 +12,7 @@ def load_blades():
             continue
 
         try:
-            module_path = f"blades.{entry}.blade"
+            module_path = f"rybicka.blades.{entry}.blade"
             module = importlib.import_module(module_path)
             blade_instance = module.Blade()
 

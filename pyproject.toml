@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["./"]
+include = ["rybicka"]
+
+[project]
+name = "rybicka"
+version = "0.0.1"
+description = "Easy to run test tool for various protocols. Hopefully..."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "cmd2>=2.6.0",
+]
+authors = [
+  {name = "Lukas Splavec", email = "splavecl@gmail.com"},
+  {name = "Vaclav Kucera", email = "v.kucera@vivaldi.net"},
+]
+
+[project.scripts]
+rybicka = "rybicka.rybicka:main"
+
+[project.urls]
+Source = "https://github.com/smoofy24/rybicka"

@@ -1,6 +1,6 @@
 import cmd2
-from core.loader import load_blades
-from core.blade_base import BaseBlade
+from rybicka.core.loader import load_blades
+from rybicka.core.blade_base import BaseBlade
 
 class RybickaShell(cmd2.Cmd):
     def __init__(self):
