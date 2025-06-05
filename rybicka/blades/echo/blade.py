@@ -1,4 +1,4 @@
-from core.blade_base import BaseBlade
+from rybicka.core.blade_base import BaseBlade
 
 class Blade(BaseBlade):
     name = "echo"
