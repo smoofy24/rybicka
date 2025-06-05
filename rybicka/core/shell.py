@@ -18,6 +18,13 @@ class RybickaShell(cmd2.Cmd):
         for name, blade in self.blades.items():
             self.poutput(f"{name} - {blade.description}")
 
+    def update_prompt(self):
+        if self.current_blade:
+            blade_name = f"\033[92m{self.current_blade.name}\033[0m"
+            self.prompt = f"rybicka({blade_name})> "
+        else:
+            self.prompt = "rybicka> "
+
     def do_use(self, args):
         """Use a blade: use <blade_name>"""
         blade_name = args.strip()
@@ -26,7 +33,11 @@ class RybickaShell(cmd2.Cmd):
             self.poutput(f"Blade '{blade_name}' not found.")
             return
         self.current_blade = blade
+        self.update_prompt()
         self.poutput(f"[+] Loaded blade: {blade_name}")
+
+    def complete_use(self, text, line, begidx, endidx):
+        return [name for name in self.blades if name.startswith(text)]
 
     def do_set(self, args):
         """Set argument for the selected blade: set <key> <value>"""
@@ -42,6 +53,11 @@ class RybickaShell(cmd2.Cmd):
         key, value = parts
         self.current_blade.set_arg(key, value)
         self.poutput(f"[+] Set {key} = {value}")
+
+    def complete_set(self, text, line, begidx, endidx):
+        if not self.current_blade or not self.current_blade.arg_spec:
+            return []
+        return [key for key in self.current_blade.arg_spec if key.startswith(text)]
 
     def do_show(self, args):
         """Show options for current blade: show options"""
